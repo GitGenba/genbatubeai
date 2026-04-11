@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    reactCompiler: false,
-  },
+  reactCompiler: false,
 };
 
 export default nextConfig;
