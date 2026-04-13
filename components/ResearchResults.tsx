@@ -17,7 +17,7 @@ export default function ResearchResults() {
     <>
       <ResultsTable
         data={table1}
-        title="Таблица 1 — результаты поиска"
+        title="Table 1 — Search Results"
         showKeywordColumn={true}
         isLoading={isLoading}
       />
@@ -25,7 +25,7 @@ export default function ResearchResults() {
       {(table1.length > 0 || isLoading) && (
         <ResultsTable
           data={table2}
-          title="Таблица 2 — топ роликов каналов"
+          title="Table 2 — Top Videos from Channels"
           showKeywordColumn={false}
           isLoading={isLoadingTable2 || isLoading}
         />

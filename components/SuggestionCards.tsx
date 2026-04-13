@@ -50,18 +50,18 @@ export default function SuggestionCards() {
   };
 
   return (
-    <div className="mt-4">
-      <p className="text-sm text-gray-400 mb-2">Предложения:</p>
+    <div>
+      <p className="text-sm text-gray-500 mb-2">Suggestions:</p>
       <div className="flex flex-wrap gap-2">
         {suggestions.map((suggestion, index) => (
           <button
             key={`${suggestion}-${index}`}
             onClick={() => handleClick(suggestion, index)}
             disabled={isDisabled || loadingIndex !== null}
-            className={`px-4 py-2 rounded-lg border transition-colors ${
+            className={`px-4 py-2 rounded-xl border transition-all text-sm ${
               isDisabled
-                ? "opacity-50 cursor-not-allowed bg-gray-800 border-gray-600 text-gray-400"
-                : "bg-gray-800 border-gray-600 text-gray-100 hover:border-blue-500 hover:bg-gray-700 cursor-pointer"
+                ? "opacity-40 cursor-not-allowed bg-[#1a1a1a] border-[#2a2a2a] text-gray-500"
+                : "bg-[#1a1a1a] border-[#2a2a2a] text-gray-300 hover:border-blue-500 hover:text-blue-400 cursor-pointer"
             }`}
           >
             {loadingIndex === index ? "..." : `+ ${suggestion}`}

@@ -26,7 +26,6 @@ export default function FinalList() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for older browsers
       const textarea = document.createElement("textarea");
       textarea.value = text;
       document.body.appendChild(textarea);
@@ -39,7 +38,7 @@ export default function FinalList() {
   };
 
   const handleExportCSV = () => {
-    const headers = ["Название", "Канал", "Просмотры", "Дата", "Ссылка"];
+    const headers = ["Title", "Channel", "Views", "Date", "URL"];
     const rows = finalList.map((video) => [
       `"${video.title.replace(/"/g, '""')}"`,
       `"${video.channelTitle.replace(/"/g, '""')}"`,
@@ -70,26 +69,27 @@ export default function FinalList() {
   };
 
   return (
-    <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">
-        Финальный список ({finalList.length})
+    <div className="mt-10 p-6 bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl">
+      <h2 className="text-xl font-semibold text-white mb-4">
+        Final List ({finalList.length})
       </h2>
 
       <div className="space-y-3 mb-6">
         {finalList.map((video) => (
           <div
             key={video.id}
-            className="flex items-center gap-4 p-3 bg-white rounded-lg shadow-sm"
+            className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 bg-[#0f0f0f] border border-[#2a2a2a] rounded-xl"
           >
             <a
               href={video.videoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="flex-shrink-0"
             >
               <img
                 src={video.thumbnailUrl}
                 alt={video.title}
-                className="w-[60px] h-[34px] object-cover rounded"
+                className="w-full sm:w-24 h-auto aspect-video object-cover rounded-lg"
               />
             </a>
 
@@ -98,47 +98,47 @@ export default function FinalList() {
                 href={video.videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline font-medium line-clamp-1"
+                className="text-blue-400 hover:text-blue-300 font-medium line-clamp-1 transition-colors"
               >
                 {video.title}
               </a>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mt-1">
                 <a
                   href={video.channelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline"
+                  className="hover:text-gray-400 transition-colors"
                 >
                   {video.channelTitle}
                 </a>
                 <span>•</span>
-                <span>{formatViewCount(video.viewCount)} просмотров</span>
+                <span>{formatViewCount(video.viewCount)} views</span>
               </div>
             </div>
 
             <button
               onClick={() => removeFromFinalList(video.id)}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
-              aria-label="Удалить из списка"
+              className="w-full sm:w-auto px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 transition-all text-sm font-medium"
+              aria-label="Remove from list"
             >
-              −
+              Remove
             </button>
           </div>
         ))}
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
         <button
           onClick={handleCopy}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex-1 sm:flex-none px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-all"
         >
-          {copied ? "Скопировано!" : "Скопировать список"}
+          {copied ? "Copied!" : "Copy List"}
         </button>
         <button
           onClick={handleExportCSV}
-          className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          className="flex-1 sm:flex-none px-6 py-3 bg-[#2a2a2a] text-gray-300 rounded-xl font-medium hover:bg-[#333] transition-all"
         >
-          Экспорт CSV
+          Export CSV
         </button>
       </div>
     </div>

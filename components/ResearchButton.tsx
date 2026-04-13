@@ -25,14 +25,14 @@ export default function ResearchButton() {
       });
 
       if (!response.ok) {
-        throw new Error("Ошибка при поиске");
+        throw new Error("Search failed");
       }
 
       const data = await response.json();
       setTable1(data.table1 || []);
       setTable2(data.table2 || []);
     } catch {
-      setError("Ошибка при поиске. Попробуй снова.");
+      setError("Search failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -42,15 +42,15 @@ export default function ResearchButton() {
     <button
       onClick={handleClick}
       disabled={isDisabled}
-      className={`w-full py-3 px-6 rounded-lg font-medium text-white transition-colors flex items-center justify-center gap-2 ${
+      className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-3 ${
         isDisabled
-          ? "bg-gray-400 cursor-not-allowed"
-          : "bg-green-600 hover:bg-green-700"
+          ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+          : "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 shadow-lg shadow-green-600/20"
       }`}
     >
       {isLoading && (
         <svg
-          className="animate-spin h-5 w-5 text-white"
+          className="animate-spin h-5 w-5"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ export default function ResearchButton() {
           />
         </svg>
       )}
-      {isLoading ? "Ищем..." : "Ресерч"}
+      {isLoading ? "Searching..." : "Research"}
     </button>
   );
 }

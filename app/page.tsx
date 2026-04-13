@@ -9,24 +9,24 @@ import ErrorDisplay from "@/components/ErrorDisplay";
 
 export default function Home() {
   return (
-    <main className="max-w-[1200px] mx-auto p-8">
-      <section className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <section className="mb-8 sm:mb-10">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">
           YouTube Research Tool
         </h1>
-        <p className="text-gray-600">
-          Исследуй конкурентов по ключевым запросам
+        <p className="text-gray-400 text-sm sm:text-base">
+          Research competitors by keywords and discover top-performing videos
         </p>
       </section>
 
-      <section className="mb-6">
+      <section className="mb-6 space-y-4">
         <KeywordInput />
         <KeywordChips />
         <SuggestionCards />
       </section>
 
       <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <RegionSelector />
         </div>
         <ErrorDisplay />

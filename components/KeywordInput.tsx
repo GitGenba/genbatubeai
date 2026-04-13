@@ -17,14 +17,14 @@ export default function KeywordInput() {
   const validate = (input: string): string | null => {
     const trimmed = input.trim();
     if (trimmed.length === 0) {
-      return "Введите запрос";
+      return "Enter a keyword";
     }
     if (trimmed.length > 50) {
-      return "Максимум 50 символов";
+      return "Maximum 50 characters";
     }
     const wordCount = trimmed.split(/\s+/).length;
     if (wordCount > 5) {
-      return "Максимум 5 слов";
+      return "Maximum 5 words";
     }
     return null;
   };
@@ -39,7 +39,7 @@ export default function KeywordInput() {
     }
 
     if (keywords.includes(trimmed)) {
-      setError("Такой запрос уже добавлен");
+      setError("This keyword is already added");
       return;
     }
 
@@ -79,7 +79,7 @@ export default function KeywordInput() {
 
   return (
     <div className="w-full">
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
         <input
           type="text"
           value={value}
@@ -88,22 +88,22 @@ export default function KeywordInput() {
             setError(null);
           }}
           onKeyDown={handleKeyDown}
-          placeholder="Введите ключевой запрос..."
+          placeholder="Enter a keyword..."
           disabled={isDisabled || isLoading}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+          className="flex-1 px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         />
         <button
           onClick={handleSubmit}
           disabled={isDisabled || isLoading}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed transition-all sm:w-auto w-full"
         >
-          {isLoading ? "..." : "Добавить"}
+          {isLoading ? "..." : "Add"}
         </button>
       </div>
-      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
       {isDisabled && (
         <p className="mt-2 text-sm text-gray-500">
-          Достигнут лимит в 5 запросов
+          Maximum 5 keywords reached
         </p>
       )}
     </div>
