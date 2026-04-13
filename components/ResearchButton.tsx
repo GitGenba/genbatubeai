@@ -1,6 +1,7 @@
 "use client";
 
 import { useResearchStore } from "@/store/useResearchStore";
+import { useSavedResearchStore } from "@/store/useSavedResearchStore";
 
 export default function ResearchButton() {
   const keywords = useResearchStore((state) => state.keywords);
@@ -10,6 +11,7 @@ export default function ResearchButton() {
   const setError = useResearchStore((state) => state.setError);
   const setTable1 = useResearchStore((state) => state.setTable1);
   const setTable2 = useResearchStore((state) => state.setTable2);
+  const saveResearch = useSavedResearchStore((state) => state.saveResearch);
 
   const isDisabled = keywords.length === 0 || isLoading;
 
@@ -29,8 +31,15 @@ export default function ResearchButton() {
       }
 
       const data = await response.json();
-      setTable1(data.table1 || []);
-      setTable2(data.table2 || []);
+      const table1 = data.table1 || [];
+      const table2 = data.table2 || [];
+      
+      setTable1(table1);
+      setTable2(table2);
+      
+      if (table1.length > 0 || table2.length > 0) {
+        saveResearch(keywords, regionCode, table1, table2);
+      }
     } catch {
       setError("Search failed. Please try again.");
     } finally {

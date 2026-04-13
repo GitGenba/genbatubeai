@@ -29,6 +29,15 @@ export interface RegionOption {
   name: string;
 }
 
+export interface SavedResearch {
+  id: string;
+  date: string;
+  keywords: string[];
+  regionCode: string;
+  table1: VideoResult[];
+  table2: VideoResult[];
+}
+
 export interface ApiSuggestionsRequest {
   keyword: string;
   existingKeywords: string[];

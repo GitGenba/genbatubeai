@@ -6,6 +6,7 @@ import ResearchButton from "@/components/ResearchButton";
 import ResearchResults from "@/components/ResearchResults";
 import FinalList from "@/components/FinalList";
 import ErrorDisplay from "@/components/ErrorDisplay";
+import SavedResearches from "@/components/SavedResearches";
 
 export default function Home() {
   return (
@@ -32,6 +33,8 @@ export default function Home() {
         <ErrorDisplay />
         <ResearchButton />
       </section>
+
+      <SavedResearches />
 
       <ResearchResults />
 
