@@ -19,7 +19,7 @@ function getApiKey(): string {
 
 export async function searchVideos(
   keyword: string,
-  channelId?: string
+  options?: { channelId?: string; regionCode?: string }
 ): Promise<string[]> {
   try {
     const params = new URLSearchParams({
@@ -33,9 +33,13 @@ export async function searchVideos(
       part: "id",
     });
 
-    if (channelId) {
-      params.set("channelId", channelId);
+    if (options?.channelId) {
+      params.set("channelId", options.channelId);
       params.delete("q");
+    }
+
+    if (options?.regionCode) {
+      params.set("regionCode", options.regionCode);
     }
 
     const response = await fetch(`${YOUTUBE_API_BASE}/search?${params}`);
@@ -125,7 +129,8 @@ export function deduplicateByChannel(videos: VideoResult[]): VideoResult[] {
 }
 
 export async function getTopVideosForChannel(
-  channelId: string
+  channelId: string,
+  regionCode?: string
 ): Promise<VideoResult[]> {
   try {
     const params = new URLSearchParams({
@@ -138,6 +143,10 @@ export async function getTopVideosForChannel(
       publishedAfter: getDateTwoYearsAgo(),
       part: "id",
     });
+
+    if (regionCode) {
+      params.set("regionCode", regionCode);
+    }
 
     const response = await fetch(`${YOUTUBE_API_BASE}/search?${params}`);
 

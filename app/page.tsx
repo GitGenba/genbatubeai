@@ -1,6 +1,7 @@
 import KeywordInput from "@/components/KeywordInput";
 import KeywordChips from "@/components/KeywordChips";
 import SuggestionCards from "@/components/SuggestionCards";
+import RegionSelector from "@/components/RegionSelector";
 import ResearchButton from "@/components/ResearchButton";
 import ResearchResults from "@/components/ResearchResults";
 import FinalList from "@/components/FinalList";
@@ -25,6 +26,9 @@ export default function Home() {
       </section>
 
       <section className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <RegionSelector />
+        </div>
         <ErrorDisplay />
         <ResearchButton />
       </section>

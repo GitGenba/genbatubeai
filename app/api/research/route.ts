@@ -14,7 +14,7 @@ export async function POST(request: Request): Promise<Response> {
   try {
     const body = (await request.json()) as ApiResearchRequest;
 
-    const { keywords } = body;
+    const { keywords, regionCode } = body;
 
     if (!Array.isArray(keywords) || keywords.length === 0) {
       return new Response(
@@ -48,7 +48,7 @@ export async function POST(request: Request): Promise<Response> {
     const table1Results = await Promise.all(
       keywords.map(async (keyword) => {
         try {
-          const videoIds = await searchVideos(keyword);
+          const videoIds = await searchVideos(keyword, { regionCode: regionCode || undefined });
           if (videoIds.length === 0) return [];
 
           const videos = await getVideoDetails(videoIds);
@@ -70,7 +70,7 @@ export async function POST(request: Request): Promise<Response> {
     const table2Results = await Promise.all(
       uniqueChannelIds.map(async (channelId) => {
         try {
-          const topVideos = await getTopVideosForChannel(channelId);
+          const topVideos = await getTopVideosForChannel(channelId, regionCode || undefined);
           return topVideos.filter((video) => !table1VideoIds.has(video.id));
         } catch {
           return [];

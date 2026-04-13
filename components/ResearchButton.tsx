@@ -4,6 +4,7 @@ import { useResearchStore } from "@/store/useResearchStore";
 
 export default function ResearchButton() {
   const keywords = useResearchStore((state) => state.keywords);
+  const regionCode = useResearchStore((state) => state.regionCode);
   const isLoading = useResearchStore((state) => state.isLoading);
   const setLoading = useResearchStore((state) => state.setLoading);
   const setError = useResearchStore((state) => state.setError);
@@ -20,7 +21,7 @@ export default function ResearchButton() {
       const response = await fetch("/api/research", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keywords }),
+        body: JSON.stringify({ keywords, regionCode }),
       });
 
       if (!response.ok) {

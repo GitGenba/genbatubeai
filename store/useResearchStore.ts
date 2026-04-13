@@ -12,6 +12,7 @@ interface ResearchActions {
   setLoading: (v: boolean) => void;
   setLoadingTable2: (v: boolean) => void;
   setError: (msg: string | null) => void;
+  setRegionCode: (code: string) => void;
   reset: () => void;
 }
 
@@ -24,6 +25,7 @@ const initialState: ResearchState = {
   isLoading: false,
   isLoadingTable2: false,
   error: null,
+  regionCode: "",
 };
 
 export const useResearchStore = create<ResearchState & ResearchActions>(
@@ -64,6 +66,8 @@ export const useResearchStore = create<ResearchState & ResearchActions>(
     setLoadingTable2: (v: boolean) => set({ isLoadingTable2: v }),
 
     setError: (msg: string | null) => set({ error: msg }),
+
+    setRegionCode: (code: string) => set({ regionCode: code }),
 
     reset: () => set(initialState),
   })

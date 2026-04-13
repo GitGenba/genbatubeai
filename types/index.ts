@@ -21,6 +21,12 @@ export interface ResearchState {
   isLoading: boolean;
   isLoadingTable2: boolean;
   error: string | null;
+  regionCode: string;
+}
+
+export interface RegionOption {
+  code: string;
+  name: string;
 }
 
 export interface ApiSuggestionsRequest {
@@ -34,6 +40,7 @@ export interface ApiSuggestionsResponse {
 
 export interface ApiResearchRequest {
   keywords: string[];
+  regionCode?: string;
 }
 
 export interface ApiResearchResponse {
