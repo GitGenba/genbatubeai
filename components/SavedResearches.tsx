@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useSavedResearchStore } from "@/store/useSavedResearchStore";
 import { useResearchStore } from "@/store/useResearchStore";
 
@@ -20,6 +21,12 @@ const REGION_NAMES: Record<string, string> = {
 export default function SavedResearches() {
   const savedResearches = useSavedResearchStore((state) => state.savedResearches);
   const deleteResearch = useSavedResearchStore((state) => state.deleteResearch);
+  const fetchResearches = useSavedResearchStore((state) => state.fetchResearches);
+  const isLoading = useSavedResearchStore((state) => state.isLoading);
+
+  useEffect(() => {
+    fetchResearches();
+  }, [fetchResearches]);
 
   const setKeywords = useResearchStore((state) => {
     return (keywords: string[]) => {
@@ -30,6 +37,12 @@ export default function SavedResearches() {
   const setTable1 = useResearchStore((state) => state.setTable1);
   const setTable2 = useResearchStore((state) => state.setTable2);
   const setSuggestions = useResearchStore((state) => state.setSuggestions);
+
+  if (isLoading) {
+    return (
+      <div className="mb-8 text-gray-500 text-sm">Loading researches...</div>
+    );
+  }
 
   if (savedResearches.length === 0) {
     return null;
