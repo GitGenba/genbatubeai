@@ -7,23 +7,17 @@ import ResearchResults from "@/components/ResearchResults";
 import FinalList from "@/components/FinalList";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import SavedResearches from "@/components/SavedResearches";
-import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       <section className="mb-8 sm:mb-10">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">
-              YouTube Research Tool
-            </h1>
-            <p className="text-gray-400 text-sm sm:text-base">
-              Research competitors by keywords and discover top-performing videos
-            </p>
-          </div>
-          <UserButton />
-        </div>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">
+          YouTube Research Tool
+        </h1>
+        <p className="text-gray-400 text-sm sm:text-base">
+          Research competitors by keywords and discover top-performing videos
+        </p>
       </section>
 
       <section className="mb-6 space-y-4">
